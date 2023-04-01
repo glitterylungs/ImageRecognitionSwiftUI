@@ -9,15 +9,40 @@ import SwiftUI
 
 struct ContentView: View {
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundColor(.accentColor)
-            Text("Hello, world!")
+        NavigationView {
+            VStack {
+                Image("Sample")
+                    .resizable()
+                    .scaledToFit()
+                    .cornerRadius(10)
+                    .overlay(RoundedRectangle(cornerRadius: 10)
+                        .stroke(Color("Basic"), lineWidth: 6))
+                    .shadow(radius: 5)
+                
+                Text("Rainbow")
+                    .padding(.top, 50)
+                    .font(.system(size: 20))
+                Text("Forest")
+                    .font(.system(size: 20))
+                Text("Grass")
+                    .font(.system(size: 20))
+                
+            }
+            .padding(20)
+            .navigationTitle("ImageRecognition")
+            .toolbar {
+                Button {
+                    print("Camera button clicked")
+                } label: {
+                    Image(systemName: "camera").foregroundColor(Color("Basic"))
+                }
+            }
+        
         }
-        .padding()
+
     }
 }
+
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {

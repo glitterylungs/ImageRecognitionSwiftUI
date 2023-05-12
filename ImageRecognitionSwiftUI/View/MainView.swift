@@ -33,14 +33,17 @@ struct MainView: View {
                         .shadow(radius: 5)
                 }
                 
-                Text("Rainbow")
-                    .padding(.top, 50)
-                    .font(.system(size: 20))
-                Text("Forest")
-                    .font(.system(size: 20))
-                Text("Grass")
-                    .font(.system(size: 20))
-                
+                if (!viewModel.results.isEmpty){
+                    
+                    Text(viewModel.results[0] ?? "")
+                        .padding(.top, 50)
+                        .font(.system(size: 20))
+                    Text(viewModel.results[1] ?? "")
+                        .font(.system(size: 20))
+                    Text(viewModel.results[2] ?? "")
+                        .font(.system(size: 20))
+                    
+                }
             }
             .padding(20)
             .navigationTitle("ImageRecognition")
@@ -52,7 +55,12 @@ struct MainView: View {
                 }
             }
             .sheet(isPresented: $viewModel.showPicker) {
-                ImagePicker(sourceType: .camera, selectedImage: $viewModel.image)
+                ImagePicker(sourceType: .camera, selectedImage: $viewModel.image, onImageSelected: { image in
+                    guard let ciImage = CIImage(image: image) else {
+                        return
+                    }
+                    viewModel.detect(image: ciImage)
+                })
             }
         
         }

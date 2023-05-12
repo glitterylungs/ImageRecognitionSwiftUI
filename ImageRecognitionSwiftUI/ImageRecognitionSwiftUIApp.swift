@@ -11,7 +11,8 @@ import SwiftUI
 struct ImageRecognitionSwiftUIApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            MainView()
+                .environmentObject(MainViewModel())
         }
     }
 }
